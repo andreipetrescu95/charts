@@ -11,6 +11,8 @@ image:
   pullSecret: dockerhub
 
 app:
+  containerPort: 3000
+  healthPath: /health
   syncCron: "*/30 * * * *"
   envVars: {}
 
