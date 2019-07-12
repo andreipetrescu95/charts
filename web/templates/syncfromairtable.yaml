@@ -1,0 +1,25 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ include "web.fullname" . }}
+spec:
+  schedule: {{ .Values.app.syncCron }}
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 60
+      template:
+        name: sync-cron
+        spec:
+          imagePullSecrets:
+          - name: {{ .Values.image.pullSecret }}
+          restartPolicy: Never
+          containers:
+            - name: sync-cron
+              image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              envFrom:
+              - configMapRef:
+                  name: {{ include "web.fullname" . }}
+              command:
+                - yarn
+                - sync:prod:all
