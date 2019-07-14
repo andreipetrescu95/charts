@@ -6,7 +6,7 @@ spec:
   schedule: "{{ .Values.app.syncCron }}"
   jobTemplate:
     spec:
-      activeDeadlineSeconds: 60
+      activeDeadlineSeconds: 900
       template:
         name: sync-cron
         spec:
