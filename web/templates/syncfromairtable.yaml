@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: {{ include "web.fullname" . }}
 spec:
-  schedule: {{ .Values.app.syncCron }}
+  schedule: "{{ .Values.app.syncCron }}"
   jobTemplate:
     spec:
       activeDeadlineSeconds: 60

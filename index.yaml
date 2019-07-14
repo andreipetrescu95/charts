@@ -3,11 +3,11 @@ entries:
   web:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-07-12T20:14:56.252911+03:00"
+    created: "2019-07-14T11:50:53.503645+03:00"
     description: A Helm chart for Kubernetes
-    digest: 58b9240139375a24778b93f6b89316d030bc04492023f7ac0fdd60b618cc5f4d
+    digest: 16b3276cb76a7d802b7e0636b05aa4c345fe50d502bbfb5705306bfeab2d7549
     name: web
     urls:
-    - https://raw.githubusercontent.com/mr-yum/charts/master/web-0.1.0.tgz
-    version: 0.1.0
-generated: "2019-07-12T20:14:56.252063+03:00"
+    - https://raw.githubusercontent.com/mr-yum/charts/master/web-0.1.1.tgz
+    version: 0.1.1
+generated: "2019-07-14T11:50:53.502907+03:00"
