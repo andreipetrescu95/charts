@@ -25,9 +25,8 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          envFrom:
-          - configMapRef:
-              name: {{ include "web.fullname" . }}
+          env:
+            {{- toYaml .Values.app.env | nindent 12 }}
           ports:
             - name: http
               containerPort: {{ .Values.app.containerPort }}

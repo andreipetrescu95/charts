@@ -17,9 +17,8 @@ spec:
         - name: db-migrate
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          envFrom:
-          - configMapRef:
-              name: {{ include "web.fullname" . }}
+          env:
+            {{- toYaml .Values.app.env | nindent 12 }}
           command:
             - ./node_modules/.bin/typeorm
             - migration:run
