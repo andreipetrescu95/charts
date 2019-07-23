@@ -10,6 +10,7 @@ usage()
 }
 
 helm package web
+helm package pgweb
 
 helm serve --repo-path ./ &
 
