@@ -3,14 +3,8 @@ kind: Job
 metadata:
   name: {{ include "web.fullname" . }}
   annotations:
-    ad.datadoghq.com/dbmigrate.logs: '[{"source":"{{ .Release.Name}}","service":"{{ .Release.Service }}"}]'
     "helm.sh/hook": pre-install,pre-upgrade
     "helm.sh/hook-delete-policy": hook-succeeded
-  labels:
-    app.kubernetes.io/name: {{ include "web.name" . }}
-    helm.sh/chart: {{ include "web.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   activeDeadlineSeconds: 60
   template:
