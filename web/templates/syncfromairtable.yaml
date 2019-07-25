@@ -2,8 +2,6 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: {{ include "web.fullname" . }}
-  annotations:
-    ad.datadoghq.com/sync.logs: '[{"source":"{{ .Release.Name}}","service":"{{ .Release.Service }}"}]'
   labels:
     app.kubernetes.io/name: {{ include "web.name" . }}
     helm.sh/chart: {{ include "web.chart" . }}
@@ -15,6 +13,12 @@ spec:
     spec:
       activeDeadlineSeconds: 900
       template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: {{ include "web.name" . }}
+            app.kubernetes.io/instance: {{ .Release.Name }}
+          annotations:
+            ad.datadoghq.com/sync.logs: '[{"source":"{{ .Release.Name}}","env":"{{ .Release.Namespace }}"}]'
         name: sync-cron
         spec:
           imagePullSecrets:

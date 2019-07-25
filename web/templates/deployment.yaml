@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "web.fullname" . }}
-  annotations:
-    ad.datadoghq.com/api.logs: '[{"source":"{{ .Release.Name}}","service":"{{ .Release.Service }}"}]'
   labels:
     app.kubernetes.io/name: {{ include "web.name" . }}
     helm.sh/chart: {{ include "web.chart" . }}
@@ -17,6 +15,8 @@ spec:
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
+      annotations:
+        ad.datadoghq.com/api.logs: '[{"source":"{{ .Release.Name}}","env":"{{ .Release.Namespace }}"}]'
       labels:
         app.kubernetes.io/name: {{ include "web.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}

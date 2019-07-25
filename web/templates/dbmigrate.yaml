@@ -3,7 +3,6 @@ kind: Job
 metadata:
   name: {{ include "web.fullname" . }}
   annotations:
-    ad.datadoghq.com/dbmigrate.logs: '[{"source":"{{ .Release.Name}}","service":"{{ .Release.Service }}"}]'
     "helm.sh/hook": pre-install,pre-upgrade
     "helm.sh/hook-delete-policy": hook-succeeded
   labels:
@@ -14,6 +13,12 @@ metadata:
 spec:
   activeDeadlineSeconds: 60
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "web.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+      annotations:
+        ad.datadoghq.com/dbmigrate.logs: '[{"source":"{{ .Release.Name}}","env":"{{ .Release.Namespace }}"}]'
     name: db-migrate
     spec:
       imagePullSecrets:
