@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "web.fullname" . }}
+  annotations:
+    ad.datadoghq.com/api.logs: '[{"source":"{{ .Release.Name}}","service":"{{ .Release.Service }}"}]'
   labels:
     app.kubernetes.io/name: {{ include "web.name" . }}
     helm.sh/chart: {{ include "web.chart" . }}

@@ -3,6 +3,7 @@ kind: Job
 metadata:
   name: {{ include "web.fullname" . }}
   annotations:
+    ad.datadoghq.com/api.logs: '[{"source":"{{ .Release.Name}}","service":"{{ .Release.Service }}"}]'
     "helm.sh/hook": pre-install,pre-upgrade
     "helm.sh/hook-delete-policy": hook-succeeded
 spec:

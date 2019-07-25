@@ -2,6 +2,13 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: {{ include "web.fullname" . }}
+  annotations:
+    ad.datadoghq.com/sync.logs: '[{"source":"{{ .Release.Name}}","service":"{{ .Release.Service }}"}]'
+  labels:
+    app.kubernetes.io/name: {{ include "web.name" . }}
+    helm.sh/chart: {{ include "web.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   schedule: "{{ .Values.app.syncCron }}"
   jobTemplate:
