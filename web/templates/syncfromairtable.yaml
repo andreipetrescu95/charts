@@ -18,7 +18,7 @@ spec:
             app.kubernetes.io/name: {{ include "web.name" . }}
             app.kubernetes.io/instance: {{ .Release.Name }}
           annotations:
-            ad.datadoghq.com/sync.logs: '[{"source":"{{ .Release.Name}}","env":"{{ .Release.Namespace }}"}]'
+            ad.datadoghq.com/sync.logs: '[{"source":"{{ .Release.Name}}","service":"{{ .Release.Namespace }}"}]'
         name: sync-cron
         spec:
           imagePullSecrets:

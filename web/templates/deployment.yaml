@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/api.logs: '[{"source":"{{ .Release.Name}}","env":"{{ .Release.Namespace }}"}]'
+        ad.datadoghq.com/api.logs: '[{"source":"{{ .Release.Name}}","service":"{{ .Release.Namespace }}"}]'
       labels:
         app.kubernetes.io/name: {{ include "web.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
