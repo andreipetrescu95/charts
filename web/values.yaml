@@ -14,6 +14,8 @@ app:
   containerPort: 3000
   healthPath: /health
   syncCron: "*/30 * * * *"
+  cronCommand:
+    - cmd
   env:
   - name: DEMO_GREETING
     value: "Hello from the environment"

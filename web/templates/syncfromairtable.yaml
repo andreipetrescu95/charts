@@ -31,5 +31,4 @@ spec:
               env:
                 {{- toYaml .Values.app.env | nindent 16 }}
               command:
-                - yarn
-                - sync:prod:all
+                {{- toYaml .Values.app.cronCommand | nindent 16 }}
