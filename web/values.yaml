@@ -13,6 +13,8 @@ image:
 app:
   containerPort: 3000
   healthPath: /health
+  migrateCommand:
+    - yarn run migrate
   syncCron: "*/30 * * * *"
   cronCommand:
     - cmd

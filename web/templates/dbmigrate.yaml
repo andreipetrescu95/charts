@@ -31,5 +31,4 @@ spec:
           env:
             {{- toYaml .Values.app.env | nindent 12 }}
           command:
-            - ./node_modules/.bin/typeorm
-            - migration:run
+            {{- toYaml .Values.app.migrateCommand | nindent 12 }}
