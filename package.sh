@@ -11,6 +11,7 @@ usage()
 
 helm package web
 helm package pgweb
+helm package next
 
 helm serve --repo-path ./ &
 
