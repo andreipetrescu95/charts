@@ -3,28 +3,19 @@ entries:
   next:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-09-06T14:26:59.834679+10:00"
+    created: "2019-09-11T15:11:14.377471+10:00"
     description: A Helm chart for Kubernetes
-    digest: e4414f3077344d30c35c1b99f275aa03dd27db5786a29f1eba2b82046aa62251
+    digest: 5fe5b872ace8da1ae431d47dc06deba75cb7a792a51d8db9fbcc9698de10f92b
     name: next
     urls:
-    - https://raw.githubusercontent.com/mr-yum/charts/master/next-0.1.1.tgz
-    version: 0.1.1
-  - apiVersion: v1
-    appVersion: "1.0"
-    created: "2019-09-06T14:26:59.834386+10:00"
-    description: A Helm chart for Kubernetes
-    digest: 0513620ac11b5fbfc1cd76f1d120414aebd8174d117d4f28df9182025a9faab4
-    name: next
-    urls:
-    - https://raw.githubusercontent.com/mr-yum/charts/master/next-0.1.0.tgz
-    version: 0.1.0
+    - https://raw.githubusercontent.com/mr-yum/charts/master/next-0.1.2.tgz
+    version: 0.1.2
   pgweb:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-09-06T14:26:59.834939+10:00"
+    created: "2019-09-11T15:11:14.377859+10:00"
     description: A Helm chart for Kubernetes
-    digest: c99352242de27f8263bedd16468c51dd061b60391e02571b465d539ae272a881
+    digest: 1f352e7af935dc30d875974acee5875351d5a8547fafa30149217a78f972e4d4
     name: pgweb
     urls:
     - https://raw.githubusercontent.com/mr-yum/charts/master/pgweb-0.1.0.tgz
@@ -32,11 +23,11 @@ entries:
   web:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-09-06T14:26:59.835237+10:00"
+    created: "2019-09-11T15:11:14.378217+10:00"
     description: A Helm chart for Kubernetes
-    digest: 96377fcc4d602c5f30b7716d328a273b5851de954bbc03346fe5f09883a6ca05
+    digest: f528154c962d67c17d25b9d50b2b3340f6b6509fe756ddfb7bbe8e9f671d7576
     name: web
     urls:
     - https://raw.githubusercontent.com/mr-yum/charts/master/web-0.2.4.tgz
     version: 0.2.4
-generated: "2019-09-06T14:26:59.833428+10:00"
+generated: "2019-09-11T15:11:14.376484+10:00"

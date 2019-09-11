@@ -11,6 +11,8 @@ spec:
       app.kubernetes.io/name: {{ include "next.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
+		annotations:
+			ad.datadoghq.com/frontend.logs: '[{"source":"{{ .Release.Name}}","service":"frontend"}]'
     metadata:
       labels:
         app.kubernetes.io/name: {{ include "next.name" . }}
