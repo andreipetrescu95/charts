@@ -15,9 +15,15 @@ app:
   healthPath: /health
   migrateCommand:
     - yarn run migrate
-  syncCron: "*/30 * * * *"
-  cronCommand:
-    - cmd
+  cronJobs:
+    - schedule: "*/30 * * * *"
+      name: sample-cron-job-runs-every-30-mins
+      command:
+        - cmd
+    - schedule: "0 */1 * * *"
+      name: sample-cron-job-runs-every-hour
+      command:
+        - cmd
   env:
   - name: DEMO_GREETING
     value: "Hello from the environment"
