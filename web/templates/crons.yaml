@@ -1,4 +1,5 @@
-{{- range $index, $cronJob := $.Values.app.cronJobs }}
+{{- range $cronJob := $.Values.app.cronJobs }}
+---
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
@@ -12,7 +13,7 @@ spec:
   schedule: "{{ $cronJob.schedule }}"
   jobTemplate:
     spec:
-      activeDeadlineSeconds: 900
+      activeDeadlineSeconds: {{ $cronJob.activeDeadlineSeconds }}
       template:
         metadata:
           labels:

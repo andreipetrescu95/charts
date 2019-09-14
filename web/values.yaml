@@ -18,10 +18,12 @@ app:
   cronJobs:
     - schedule: "*/30 * * * *"
       name: sample-cron-job-runs-every-30-mins
+			activeDeadlineSeconds: 900
       command:
         - cmd
     - schedule: "0 */1 * * *"
       name: sample-cron-job-runs-every-hour
+			activeDeadlineSeconds: 900
       command:
         - cmd
   env:
