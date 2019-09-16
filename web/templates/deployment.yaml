@@ -46,7 +46,7 @@ spec:
         - image: "{{ .Values.nginx.repository }}:{{ .Values.nginx.tag }}"
           imagePullPolicy: IfNotPresent
           name: nginx
-					ports:
+          ports:
             - name: http
               containerPort: 80
           livenessProbe:
