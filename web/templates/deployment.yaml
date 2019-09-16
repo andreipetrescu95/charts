@@ -50,14 +50,10 @@ spec:
             - name: http
               containerPort: 80
           livenessProbe:
-            initialDelaySeconds: 60
-            httpGet:
-              path: {{ .Values.app.healthPath }}
+            tcpSocket:
               port: http
           readinessProbe:
-            initialDelaySeconds: 60
-            httpGet:
-              path: {{ .Values.app.healthPath }}
+            tcpSocket:
               port: http
           resources:
             {{- toYaml .Values.nginx.resources | nindent 12 }}
