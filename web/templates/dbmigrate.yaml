@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
-  activeDeadlineSeconds: 60
+  activeDeadlineSeconds: 7200
   template:
     metadata:
       labels:
