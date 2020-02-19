@@ -1,9 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "{{ include "next.fullname" . }}-test-connection"
-  labels:
-{{ include "next.labels" . | indent 4 }}
+  name: "{{ .Release.Name }}-test-connection"
   annotations:
     "helm.sh/hook": test-success
 spec:
@@ -11,5 +9,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args:  ['{{ include "next.fullname" . }}:{{ .Values.service.port }}']
+      args:  ['{{ .Release.Name }}:{{ .Values.service.port }}']
   restartPolicy: Never

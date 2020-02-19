@@ -1,0 +1,40 @@
+{{- if eq .Values.istio.enabled true }}
+{{- $relname := .Release.Name -}}
+{{- $relns := .Release.Namespace -}}
+{{- $greenTraffic := .Values.greenTraffic -}}
+{{- $blueTraffic := .Values.blueTraffic -}}
+{{- range .Values.istio.hosts }}
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ $relname }}-{{ .host }}
+  namespace: {{ $relns }}
+spec:
+  hosts:
+  - {{ .host }}
+  gateways:
+  - {{ $relname }}
+  http:
+  - name: {{ $relname }}-route
+    match:
+{{- range .paths }}
+    - uri:
+        prefix: "{{ . }}"
+{{- end }}
+    route:
+    - destination:
+        host: {{ $relname }}.{{ $relns }}.svc.cluster.local
+        subset: green
+        port:
+          number: 80
+      weight: {{ $greenTraffic }}
+    - destination:
+        host: {{ $relname }}.{{ $relns }}.svc.cluster.local
+        subset: blue
+        port:
+          number: 80
+      weight: {{ $blueTraffic }}
+
+---
+{{- end }}
+{{- end }}

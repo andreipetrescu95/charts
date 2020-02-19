@@ -1,0 +1,19 @@
+{{- if eq .Values.istio.enabled true }}
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  host: {{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_CONN
+  subsets:
+  - name: green
+    labels:
+      colour: green
+  - name: blue
+    labels:
+      colour: blue
+{{- end }}
