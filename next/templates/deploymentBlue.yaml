@@ -5,6 +5,7 @@ metadata:
   labels:
     app: {{ .Release.Name }}
     colour: blue
+    build_number: "{{ .Values.buildNrBlue }}"
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
@@ -16,6 +17,7 @@ spec:
     matchLabels:
       app: {{ .Release.Name }}
       colour: blue
+      build_number: "{{ .Values.buildNrBlue }}"
   template:
     metadata:
       annotations:
@@ -23,6 +25,7 @@ spec:
       labels:
         app: {{ .Release.Name }}
         colour: blue
+        build_number: {{ .Values.buildNrBlue }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
