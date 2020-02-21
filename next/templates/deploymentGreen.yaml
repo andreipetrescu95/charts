@@ -5,7 +5,6 @@ metadata:
   labels:
     app: {{ .Release.Name }}
     colour: green
-    build_number: "{{ .Values.buildNrGreen }}"
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
@@ -17,15 +16,14 @@ spec:
     matchLabels:
       app: {{ .Release.Name }}
       colour: green
-      build_number: "{{ .Values.buildNrGreen }}"
   template:
     metadata:
       annotations:
         ad.datadoghq.com/frontend.logs: '[{"source":"{{ .Release.Name}}","service":"frontend"}]'
+        build_number: "{{ .Values.buildNrGreen }}"
       labels:
         app: {{ .Release.Name }}
         colour: green
-        build_number: "{{ .Values.buildNrGreen }}"
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
