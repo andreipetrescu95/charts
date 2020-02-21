@@ -9,6 +9,8 @@ kind: VirtualService
 metadata:
   name: {{ $relname }}-{{ .host }}
   namespace: {{ $relns }}
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
 spec:
   hosts:
   - {{ .host }}
