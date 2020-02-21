@@ -27,13 +27,13 @@ spec:
         subset: green
         port:
           number: 80
-      weight: {{ $greenTraffic }}
+      weight: {{ $greenTraffic | default 100 }}
     - destination:
         host: {{ $relname }}.{{ $relns }}.svc.cluster.local
         subset: blue
         port:
           number: 80
-      weight: {{ $blueTraffic }}
+      weight: {{ $blueTraffic | default 0 }}
 
 ---
 {{- end }}
