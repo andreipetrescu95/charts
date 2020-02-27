@@ -3,9 +3,9 @@ entries:
   next:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-02-27T12:04:01.190295+02:00"
+    created: "2020-02-27T12:34:55.738763+02:00"
     description: A Helm chart for Kubernetes
-    digest: 6f585c392cbf799cb316d3e2a77df8da8d825768ae558a9167dc0a68228aa313
+    digest: dfe261c13c828d1bb75e151efe85784679d735f446835de68780fc27f771cad6
     name: next
     urls:
     - next-0.2.1.tgz
@@ -13,9 +13,9 @@ entries:
   pgweb:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-02-27T12:04:01.190694+02:00"
+    created: "2020-02-27T12:34:55.739048+02:00"
     description: A Helm chart for Kubernetes
-    digest: 33e583cbd52d7da5de176ec6e70fa468316d90e21e93b3cef0754866cbae3b8c
+    digest: 57a66dbb290ce044c53e2e75a5b2c75e6d324a4947f1ae3af38966a8d8e06b75
     name: pgweb
     urls:
     - pgweb-0.1.0.tgz
@@ -23,11 +23,11 @@ entries:
   web:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-02-27T12:04:01.191763+02:00"
+    created: "2020-02-27T12:34:55.739349+02:00"
     description: A Helm chart for Kubernetes
-    digest: 356569352feec8e06268fe9c2abebf7fd77b731e8b29ecfb9cd54c371f8e6fc7
+    digest: 98464396cddfcfe86809edec228f4b3985a6e7fc9c996c976e070e1b8e21454c
     name: web
     urls:
     - web-0.3.4.tgz
     version: 0.3.4
-generated: "2020-02-27T12:04:01.189142+02:00"
+generated: "2020-02-27T12:34:55.737974+02:00"
