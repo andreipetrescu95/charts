@@ -28,6 +28,6 @@ spec:
     {{- end }}
     tls:
       mode: SIMPLE
-      serverCertificate: /etc/istio/{{ .Values.certName}}-certs/tls.crt
-      privateKey: /etc/istio/{{ .Values.certName}}-certs/tls.key
+      serverCertificate: /etc/istio/{{ .Values.istio.certName}}/tls.crt
+      privateKey: /etc/istio/{{ .Values.istio.certName}}/tls.key
 {{- end }}
