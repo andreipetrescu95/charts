@@ -27,19 +27,37 @@ spec:
           env:
             {{- toYaml .Values.app.env | nindent 12 }}
           ports:
-            - name: http
+            - name: pgweb
               containerPort: {{ .Values.app.containerPort }}
               protocol: TCP
           livenessProbe:
             httpGet:
               path: {{ .Values.app.healthPath }}
-              port: http
+              port: pgweb
           readinessProbe:
             httpGet:
               path: {{ .Values.app.healthPath }}
-              port: http
+              port: pgweb
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh","-c","nginx -s quit; while killall -0 nginx; do sleep 1; done"]
+          workingDir: /var/www
+          volumeMounts:
+          - name: {{ .Release.Name }}-nginx
+            mountPath: /etc/nginx/conf.d/default.conf
+            subPath: default.conf
+          - name: htpasswd
+            mountPath: /etc/nginx/htpasswd
+            subPath: auth
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -52,3 +70,11 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: {{ .Release.Name }}-nginx
+        name: {{ .Release.Name }}-nginx
+      - name: htpasswd
+        secret:
+          secretName: basicauth
