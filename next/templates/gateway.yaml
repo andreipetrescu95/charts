@@ -23,9 +23,9 @@ spec:
       name: https-{{ .Release.Name }}
       protocol: HTTPS
     hosts:
-    {{- range .Values.endpoints }}
-    - {{ . | quote }}
-    {{- end }}
+{{- range .Values.istio.hosts }}
+    - {{ .host | quote }}
+{{- end }}
     tls:
       mode: SIMPLE
       serverCertificate: /etc/istio/{{ .Values.istio.certName}}/tls.crt
