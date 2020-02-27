@@ -19,7 +19,6 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
       annotations:
         ad.datadoghq.com/dbmigrate.logs: '[{"source":"{{ .Release.Name}}","service":"api"}]'
-    name: db-migrate
     spec:
       imagePullSecrets:
       - name: {{ .Values.image.pullSecret }}
