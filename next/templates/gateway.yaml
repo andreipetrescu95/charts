@@ -13,9 +13,9 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    {{- range .Values.istio.hosts }}
+{{- range .Values.istio.hosts }}
     - {{ .host | quote }}
-    {{- end }}
+{{- end }}
     tls:
       httpsRedirect: true
   - port:
