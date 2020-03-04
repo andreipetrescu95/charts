@@ -1,5 +1,5 @@
 # charts
 
 ```
-helm repo add mryum https://raw.githubusercontent.com/mryum/charts/master/
+helm repo add mryum https://raw.githubusercontent.com/mr-yum/charts/master/
 ```
