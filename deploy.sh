@@ -23,7 +23,7 @@ fi
 
 if [ $LIVE_COLOUR == "blue" ]; then
   TAG_GREEN=$APP_VSN-$BUILD
-  TAG_BLUE=$(kubectl -n "$ENV" get deployment "$ENV"-"$APP_NAME"-green --template="{{ (index .spec.template.spec.containers 0).image }}" | cut -d':' -f2 | tr -d '\n')
+  TAG_BLUE=$(kubectl -n "$ENV" get deployment "$ENV"-"$APP_NAME"-blue --template="{{ (index .spec.template.spec.containers 0).image }}" | cut -d':' -f2 | tr -d '\n')
   BUILD_NR_GREEN=$CI_PIPELINE_IID
   TRAFFIC_GREEN=100
   TRAFFIC_BLUE=0
@@ -35,5 +35,5 @@ else
   TRAFFIC_BLUE=100
 fi
 
-helm upgrade --install --wait "$ENV"-"$APP_NAME" "$CHART" -f "$VALUES" --set greenTraffic="$TRAFFIC_GREEN" --set blueTraffic="$TRAFFIC_BLUE" --set image.greenTag="$TAG_GREEN" --set image.blueTag="$TAG_GREEN" --set buildNrGreen="$BUILD_NR_GREEN" --set buildNrBlue="$BUILD_NR_BLUE" --namespace "$ENV"
+helm upgrade --install --wait "$ENV"-"$APP_NAME" "$CHART" -f "$VALUES" --set greenTraffic="$TRAFFIC_GREEN" --set blueTraffic="$TRAFFIC_BLUE" --set image.greenTag="$TAG_GREEN" --set image.blueTag="$TAG_BLUE" --set buildNrGreen="$BUILD_NR_GREEN" --set buildNrBlue="$BUILD_NR_BLUE" --namespace "$ENV"
 
