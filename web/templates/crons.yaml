@@ -21,7 +21,6 @@ spec:
             app.kubernetes.io/instance: {{ $.Release.Name }}
           annotations:
             ad.datadoghq.com/sync.logs: '[{"source":"{{ $.Release.Name}}","service":"api"}]'
-        name: {{ $cronJob.name }}
         spec:
           imagePullSecrets:
           - name: {{ $.Values.image.pullSecret }}
