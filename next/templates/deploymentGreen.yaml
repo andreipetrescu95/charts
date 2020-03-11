@@ -1,9 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "next.fullname" . }}
+  name: {{ .Release.Name }}-green
   labels:
-{{ include "next.labels" . | indent 4 }}
+    app: {{ .Release.Name }}
+    colour: green
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
@@ -13,23 +14,24 @@ spec:
        maxSurge: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "next.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+      app: {{ .Release.Name }}
+      colour: green
   template:
     metadata:
       annotations:
         ad.datadoghq.com/frontend.logs: '[{"source":"{{ .Release.Name}}","service":"frontend"}]'
+        build_number: "{{ .Values.buildNrGreen }}"
       labels:
-        app.kubernetes.io/name: {{ include "next.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
+        app: {{ .Release.Name }}
+        colour: green
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        - name: {{ .Release.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.greenTag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             {{- toYaml .Values.app.env | nindent 12 }}
@@ -60,7 +62,7 @@ spec:
       volumes:
       - name: conf
         configMap:
-          name: {{ include "next.fullname" . }}-nginx
+          name: {{ .Release.Name }}-nginx
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

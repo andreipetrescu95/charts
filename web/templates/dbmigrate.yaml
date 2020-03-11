@@ -19,15 +19,14 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
       annotations:
         ad.datadoghq.com/dbmigrate.logs: '[{"source":"{{ .Release.Name}}","service":"api"}]'
-    name: db-migrate
     spec:
       imagePullSecrets:
       - name: {{ .Values.image.pullSecret }}
       restartPolicy: Never
       containers:
         - name: db-migrate
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: {{ .Values.image.repository }}:latest
+          imagePullPolicy: Always
           env:
             {{- toYaml .Values.app.env | nindent 12 }}
           command:

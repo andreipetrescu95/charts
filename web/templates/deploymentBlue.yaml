@@ -1,12 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "web.fullname" . }}
+  name: {{ .Release.Name }}-blue
   labels:
-    app.kubernetes.io/name: {{ include "web.name" . }}
-    helm.sh/chart: {{ include "web.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app: {{ .Release.Name }}
+    colour: blue
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
@@ -16,21 +14,22 @@ spec:
        maxSurge: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "web.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+      app: {{ .Release.Name }}
+      colour: blue
   template:
     metadata:
       annotations:
         ad.datadoghq.com/api.logs: '[{"source":"{{ .Release.Name}}","service":"api"}]'
+        build_number: "{{ .Values.buildNrBlue }}"
       labels:
-        app.kubernetes.io/name: {{ include "web.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
+        app: {{ .Release.Name }}
+        colour: blue
     spec:
       imagePullSecrets:
       - name: {{ .Values.image.pullSecret }}
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.blueTag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             {{- toYaml .Values.app.env | nindent 12 }}
@@ -61,7 +60,7 @@ spec:
       volumes:
       - name: conf
         configMap:
-          name: {{ include "web.fullname" . }}-nginx
+          name: {{ .Release.Name }}-nginx
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

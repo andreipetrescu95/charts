@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-blue
+  labels:
+    app: {{ .Release.Name }}
+    colour: blue
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+       maxUnavailable: 25%
+       maxSurge: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+      colour: blue
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/frontend.logs: '[{"source":"{{ .Release.Name}}","service":"frontend"}]'
+        build_number: "{{ .Values.buildNrBlue }}"
+      labels:
+        app: {{ .Release.Name }}
+        colour: blue
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+        - name: {{ .Release.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.blueTag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            {{- toYaml .Values.app.env | nindent 12 }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.app.containerPort }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.app.healthPath }}
+              port: http
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.app.healthPath }}
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+        - image: "{{ .Values.nginx.repository }}:{{ .Values.nginx.tag }}"
+          imagePullPolicy: IfNotPresent
+          name: nginx
+          ports:
+            - containerPort: 80
+          resources:
+            {{- toYaml .Values.nginx.resources | nindent 12 }}
+          volumeMounts:
+          - mountPath: /etc/nginx/conf.d
+            name: conf
+      volumes:
+      - name: conf
+        configMap:
+          name: {{ .Release.Name }}-nginx
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
