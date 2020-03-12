@@ -2,7 +2,7 @@
 {{- $relname := .Release.Name -}}
 {{- $relns := .Release.Namespace -}}
 {{- range .Values.istio.hosts }}
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: {{ $relname }}-{{ .host }}
