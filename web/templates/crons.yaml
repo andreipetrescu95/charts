@@ -23,12 +23,12 @@ spec:
             ad.datadoghq.com/sync.logs: '[{"source":"{{ $.Release.Name}}","service":"api"}]'
         spec:
           imagePullSecrets:
-          - name: {{ $.Values.image.pullSecret }}
+          - name: {{ $.Values.cronImage.pullSecret }}
           restartPolicy: Never
           containers:
             - name: {{ $cronJob.name }}
-              image: {{ $.Values.image.repository }}:{{ $.Values.image.tag }}
-              imagePullPolicy: {{ $.Values.image.pullPolicy }}
+              image: {{ $.Values.cronImage.repository }}:{{ $.Values.image.tag }}
+              imagePullPolicy: {{ $.Values.cronImage.pullPolicy }}
               env:
                 {{- toYaml $.Values.app.env | nindent 16 }}
               command:
