@@ -27,7 +27,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: {{ $cronJob.name }}
-              image: {{ $.Values.cronImage.repository }}:{{ $.Values.image.tag }}
+              image: {{ $.Values.cronImage.repository }}:{{ $.Values.cronImage.tag }}
               imagePullPolicy: {{ $.Values.cronImage.pullPolicy }}
               env:
                 {{- toYaml $.Values.app.env | nindent 16 }}
