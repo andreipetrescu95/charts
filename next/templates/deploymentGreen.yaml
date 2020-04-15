@@ -33,6 +33,9 @@ spec:
         - name: {{ .Release.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.greenTag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+    {{- if .Values.args }}
+          args: "{{ .Values.args }}"
+    {{- end }}
           env:
             {{- toYaml .Values.app.env | nindent 12 }}
           ports:
